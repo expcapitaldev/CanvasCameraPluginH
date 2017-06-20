@@ -72,29 +72,15 @@ CanvasCamera.prototype.createFrame = (function (image, element) {
             // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
             this.dHeight = parseFloat(this.element.height);
 
-            console.log("sWidth " + this.sWidth);
-            console.log("sHeight " + this.sHeight);
-            console.log("dWidth " + this.dWidth);
-            console.log("dHeight " + this.dHeight);
-
             var hRatio = this.dWidth / this.sWidth;
             var vRatio = this.dHeight / this.sHeight;
             this.ratio = Math.max(hRatio, vRatio);
 
-            // console.log("hRatio " + this.hRatio);
-            // console.log("vRatio " + this.vRatio);
-
             this.dx = (this.dWidth - this.sWidth * this.ratio) / 2;
             this.dy = (this.dHeight - this.sHeight * this.ratio) / 2;
 
-            // console.log("dx " + this.dx);
-            // console.log("dy " + this.dy);
-
             //this.dWidth = this.sWidth * this.ratio;
             //this.dHeight = this.sHeight * this.ratio;
-
-            // console.log("dWidth -  " + this.sWidth * this.ratio);
-            // console.log("dHeight -  " + this.sHeight * this.ratio);
         }
 
         return this;
@@ -149,9 +135,6 @@ CanvasCamera.prototype.createRenderer = (function (element, parent) {
 
                 var frame = this.parent.createFrame(this.image, this.element);
 
-                console.log("naturalWidth " + this.image.naturalWidth);
-                console.log("naturalHeight " + this.image.naturalHeight);
-
                 this.resize().clear();
                 if (this.onBeforeDraw) {
                     this.onBeforeDraw(frame);
@@ -179,7 +162,6 @@ CanvasCamera.prototype.createRenderer = (function (element, parent) {
     };
 
     Renderer.prototype.onOrientationChange = function () {
-        console.log("onOrientationChange");
         if (this.parent.getUIOrientation() !== this.orientation) {
             this.invert();
         }
@@ -271,7 +253,6 @@ CanvasCamera.prototype.createRenderer = (function (element, parent) {
 
     Renderer.prototype.invert = function () {
         if (this.size) {
-            console.log("invert");
             var iSize = {};
             if (this.size.width && !isNaN(this.size.width)) {
                 if (this.fullscreen) {
@@ -302,7 +283,6 @@ CanvasCamera.prototype.createRenderer = (function (element, parent) {
     };
 
     Renderer.prototype.resize = function () {
-        console.log("resize");
         if (this.size) {
             var pixelRatio = window.devicePixelRatio || 1;
             // if (this.size.width && !isNaN(this.size.width)) {
